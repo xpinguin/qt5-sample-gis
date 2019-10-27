@@ -1,4 +1,7 @@
 #include "wkt_parser.h"
+#include <QRegularExpression>
+#include <QGraphicsScene>
+#include <QGraphicsTextItem>
 
 WKT_Parser::~WKT_Parser() {
 
@@ -49,7 +52,16 @@ WKT_Parser *WKT_Parser::parse(QString wkt) {
 ///////////
 WKT_Parser *WKT_Point::operator()(QString wkt_part)
 {
-  return nullptr; // TODO
+  static QRegularExpression re(R"(POINT\(([0-9\.]+) ([0-9\.]+)\))");
+  // --
+  auto m = re.match(wkt_part);
+  if (!m.hasMatch()) {
+    return nullptr;
+  }
+  // --
+  this->lat = m.captured(1).toDouble();
+  this->lon = m.captured(2).toDouble();
+  return this;
 }
 
 WKT_Parser *WKT_Line::operator()(QString wkt_part)
@@ -76,7 +88,9 @@ WKT_Parser *WKT_MultiPolygon::operator()(QString wkt_part)
 // DRAW
 ///////////
 void WKT_Point::draw(QGraphicsView *pane) {
-
+  QGraphicsScene *scn = new QGraphicsScene();
+  scn->addText(QString::asprintf("(WxH): %.9f x %.9f", this->lat, this->lon))->setPos(0, 0);
+  pane->setScene(scn);
 }
 
 void WKT_Line::draw(QGraphicsView *pane) {
