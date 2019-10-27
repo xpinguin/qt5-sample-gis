@@ -1,6 +1,6 @@
 #include "mainwindow.h"
 #include <QMessageBox>
-//#include <QtSql>
+#include <QRegularExpression>
 
 MainWindow::MainWindow(QWidget *parent) :
   QMainWindow(parent)
@@ -21,7 +21,7 @@ void MainWindow::on_btnExecSQL_clicked()
     QMessageBox::critical(this, "ОШИБКА ПОДКЛЮЧЕНИЯ", err.text());
   }
   ////
-  QMessageBox::information(this, "Текст запроса", txtSQL->toPlainText());
+  //QMessageBox::information(this, "Текст запроса", txtSQL->toPlainText());
   ////
   auto res = m_db.exec(txtSQL->toPlainText());
   {
@@ -52,6 +52,15 @@ void MainWindow::on_btnExecSQL_clicked()
                  fld.value().toString().toStdString().c_str());
     }
     // --
-    QMessageBox::information(this, QString::asprintf("СТРОКА: %d", rowNo), rowStr);
+    {
+      GeoNative geo{rowStr, rowNo};
+      this->geoWKT(geo); // FIXME the whole upper scope is to be called from the ancillary widget
+    }
   }
+}
+
+void MainWindow::on_MainWindow_geoWKT(GeoNative geo) {
+  QMessageBox::information(this, QString::asprintf("СТРОКА: %d", geo._row_id), geo._wkt);
+
+
 }
