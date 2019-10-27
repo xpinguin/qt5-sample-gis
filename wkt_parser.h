@@ -3,6 +3,7 @@
 
 #include <QString>
 #include <QGraphicsView>
+#include <vector>
 
 
 // Base class
@@ -25,6 +26,9 @@ public:
 
 // POINT(x y)
 class WKT_Point : public WKT_Parser {
+protected:
+  double lat, lon; // lattitude, longitude (NB the order!)
+
 public:
   WKT_Point() = default;
   WKT_Point(WKT_Parser *parent) : WKT_Parser(parent) { }
@@ -35,6 +39,9 @@ public:
 
 // LINE
 class WKT_Line : public WKT_Parser {
+protected:
+  WKT_Point p[2];
+
 public:
   WKT_Line() = default;
   WKT_Line(WKT_Parser *parent) : WKT_Parser(parent) { }
@@ -45,6 +52,9 @@ public:
 
 // LINESTRING
 class WKT_LineString : public WKT_Parser {
+protected:
+  std::vector<WKT_Point> p;
+
 public:
   WKT_LineString() = default;
   WKT_LineString(WKT_Parser *parent) : WKT_Parser(parent) { }
@@ -55,6 +65,9 @@ public:
 
 // POLYGON
 class WKT_Polygon : public WKT_Parser {
+protected:
+  std::vector<WKT_Point> p;
+
 public:
   WKT_Polygon() = default;
   WKT_Polygon(WKT_Parser *parent) : WKT_Parser(parent) { }
@@ -65,6 +78,9 @@ public:
 
 // MULTIPOLYGON
 class WKT_MultiPolygon : public WKT_Parser {
+protected:
+  std::vector<WKT_Polygon> poly;
+
 public:
   WKT_MultiPolygon() = default;
   WKT_MultiPolygon(WKT_Parser *parent) : WKT_Parser(parent) { }
