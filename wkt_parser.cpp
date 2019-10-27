@@ -44,6 +44,9 @@ WKT_Parser *WKT_Parser::parse(QString wkt) {
   return nullptr;
 }
 
+///////////
+// PARSE
+///////////
 WKT_Parser *WKT_Point::operator()(QString wkt_part)
 {
   return nullptr; // TODO
@@ -67,4 +70,27 @@ WKT_Parser *WKT_Polygon::operator()(QString wkt_part)
 WKT_Parser *WKT_MultiPolygon::operator()(QString wkt_part)
 {
   return nullptr; // TODO
+}
+
+///////////
+// DRAW
+///////////
+void WKT_Point::draw(QGraphicsView *pane) {
+
+}
+
+void WKT_Line::draw(QGraphicsView *pane) {
+
+}
+
+void WKT_LineString::draw(QGraphicsView *pane) {
+
+}
+
+void WKT_Polygon::draw(QGraphicsView *pane) {
+
+}
+
+void WKT_MultiPolygon::draw(QGraphicsView *pane) {
+
 }

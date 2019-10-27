@@ -2,6 +2,7 @@
 #define WKT_PARSER_H
 
 #include <QString>
+#include <QGraphicsView>
 
 
 // Base class
@@ -19,6 +20,7 @@ public:
   static WKT_Parser *parse(QString wkt);
 
   virtual WKT_Parser *operator()(QString wkt_part) = 0;
+  virtual void draw(QGraphicsView *pane) = 0;
 };
 
 // POINT(x y)
@@ -28,6 +30,7 @@ public:
   WKT_Point(WKT_Parser *parent) : WKT_Parser(parent) { }
 
   virtual WKT_Parser *operator()(QString wkt_part);
+  virtual void draw(QGraphicsView *pane);
 };
 
 // LINE
@@ -37,6 +40,7 @@ public:
   WKT_Line(WKT_Parser *parent) : WKT_Parser(parent) { }
 
   virtual WKT_Parser *operator()(QString wkt_part);
+  virtual void draw(QGraphicsView *pane);
 };
 
 // LINESTRING
@@ -46,6 +50,7 @@ public:
   WKT_LineString(WKT_Parser *parent) : WKT_Parser(parent) { }
 
   virtual WKT_Parser *operator()(QString wkt_part);
+  virtual void draw(QGraphicsView *pane);
 };
 
 // POLYGON
@@ -55,6 +60,7 @@ public:
   WKT_Polygon(WKT_Parser *parent) : WKT_Parser(parent) { }
 
   virtual WKT_Parser *operator()(QString wkt_part);
+  virtual void draw(QGraphicsView *pane);
 };
 
 // MULTIPOLYGON
@@ -64,6 +70,7 @@ public:
   WKT_MultiPolygon(WKT_Parser *parent) : WKT_Parser(parent) { }
 
   virtual WKT_Parser *operator()(QString wkt_part);
+  virtual void draw(QGraphicsView *pane);
 };
 
 

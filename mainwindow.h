@@ -2,11 +2,15 @@
 #define MAINWINDOW_H
 
 #include "ui_mainwindow.h"
+#include "wkt_parser.h"
+
 #include <QtSql>
 
 struct GeoNative {
-  QString _wkt;
+  QString _wkt_raw;
   int _row_id;
+
+  WKT_Parser *wkt;
 };
 
 class MainWindow : public QMainWindow, private Ui::MainWindow
@@ -14,7 +18,7 @@ class MainWindow : public QMainWindow, private Ui::MainWindow
   Q_OBJECT
 
 public:
-  explicit MainWindow(QWidget *parent = 0);
+  explicit MainWindow(QWidget *parent = nullptr);
 
   QSqlDatabase m_db;
 

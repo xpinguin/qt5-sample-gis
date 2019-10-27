@@ -58,17 +58,22 @@ void MainWindow::on_btnExecSQL_clicked()
       ///
       int geoFieldId = row.indexOf("locStr");
       if (geoFieldId >= 0) {
-        geo._wkt = row.field(geoFieldId).value().toString();
+        geo._wkt_raw = row.field(geoFieldId).value().toString();
       } else {
-        geo._wkt = rowStr;
+        geo._wkt_raw = rowStr;
       }
+      ///
+      geo.wkt = WKT_Parser::parse(geo._wkt_raw);
+      ///
       this->geoWKT(geo); // FIXME the whole upper scope is to be called from the ancillary widget
     }
   }
 }
 
 void MainWindow::on_MainWindow_geoWKT(GeoNative geo) {
-  QMessageBox::information(this, QString::asprintf("СТРОКА: %d", geo._row_id), geo._wkt);
-
-
+  QMessageBox::information(this, QString::asprintf("СТРОКА: %d", geo._row_id), geo._wkt_raw);
+  // --
+  if (nullptr != geo.wkt) {
+    geo.wkt->draw(this->mapView);
+  }
 }
