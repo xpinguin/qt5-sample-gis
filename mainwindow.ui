@@ -56,7 +56,7 @@
            </size>
           </property>
           <property name="plainText">
-           <string>select * from geoname limit 4;</string>
+           <string>select *,st_astext(loc) locStr from geoname limit 4;</string>
           </property>
          </widget>
         </item>

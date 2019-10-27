@@ -53,7 +53,15 @@ void MainWindow::on_btnExecSQL_clicked()
     }
     // --
     {
-      GeoNative geo{rowStr, rowNo};
+      GeoNative geo;
+      geo._row_id = rowNo;
+      ///
+      int geoFieldId = row.indexOf("locStr");
+      if (geoFieldId >= 0) {
+        geo._wkt = row.field(geoFieldId).value().toString();
+      } else {
+        geo._wkt = rowStr;
+      }
       this->geoWKT(geo); // FIXME the whole upper scope is to be called from the ancillary widget
     }
   }
