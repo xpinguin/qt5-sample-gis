@@ -12,6 +12,8 @@ MainWindow::MainWindow(QWidget *parent) :
   m_db.setDatabaseName("mosoblmap");
   m_db.setUserName("mosoblmap");
   m_db.setPassword("oblmos");
+
+  mapView->setAlignment(Qt::AlignTop|Qt::AlignLeft);
 }
 
 void MainWindow::on_btnExecSQL_clicked()
