@@ -1,7 +1,6 @@
-#include "wkt_parser.h"
 #include <QRegularExpression>
-#include <QGraphicsScene>
 #include <QGraphicsTextItem>
+#include "wkt_parser.h"
 
 WKT_Parser::~WKT_Parser() {
 
