@@ -26,11 +26,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    wkt_parser.cpp
+    wkt_parser.cpp \
+    graphicspane.cpp
 
 HEADERS += \
         mainwindow.h \
-    wkt_parser.h
+    wkt_parser.h \
+    graphicspane.h
 
 FORMS += \
         mainwindow.ui

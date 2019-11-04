@@ -13,7 +13,9 @@ MainWindow::MainWindow(QWidget *parent) :
   m_db.setUserName("mosoblmap");
   m_db.setPassword("oblmos");
 
-  mapView->setAlignment(Qt::AlignTop|Qt::AlignLeft);
+  m_pane = new GraphicsPane();
+  mapView->setScene(m_pane);
+  mapView->setAlignment(Qt::AlignCenter/*Qt::AlignTop|Qt::AlignLeft*/);
 }
 
 void MainWindow::on_btnExecSQL_clicked()
@@ -76,6 +78,6 @@ void MainWindow::on_MainWindow_geoWKT(GeoNative geo) {
   QMessageBox::information(this, QString::asprintf("СТРОКА: %d", geo._row_id), geo._wkt_raw);
   // --
   if (nullptr != geo.wkt) {
-    geo.wkt->draw(this->mapView);
+    geo.wkt->draw(m_pane);
   }
 }

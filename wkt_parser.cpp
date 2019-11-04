@@ -87,24 +87,23 @@ WKT_Parser *WKT_MultiPolygon::operator()(QString wkt_part)
 ///////////
 // DRAW
 ///////////
-void WKT_Point::draw(QGraphicsView *pane) {
-  QGraphicsScene *scn = new QGraphicsScene();
-  scn->addText(QString::asprintf("(WxH): %f x %f", this->lat, this->lon))->setPos(0, 0);
-  pane->setScene(scn);
+void WKT_Point::draw(GraphicsPane *pane) {
+  pane->addEllipse(this->lat, this->lon, 10.0, 10.0);
+  //pane->addText(QString::asprintf("(WxH): %f x %f", this->lat, this->lon))->setPos(0, 0);
 }
 
-void WKT_Line::draw(QGraphicsView *pane) {
-
-}
-
-void WKT_LineString::draw(QGraphicsView *pane) {
+void WKT_Line::draw(GraphicsPane *pane) {
 
 }
 
-void WKT_Polygon::draw(QGraphicsView *pane) {
+void WKT_LineString::draw(GraphicsPane *pane) {
 
 }
 
-void WKT_MultiPolygon::draw(QGraphicsView *pane) {
+void WKT_Polygon::draw(GraphicsPane *pane) {
+
+}
+
+void WKT_MultiPolygon::draw(GraphicsPane *pane) {
 
 }

@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include "ui_mainwindow.h"
+#include "graphicspane.h"
 #include "wkt_parser.h"
 
 #include <QtSql>
@@ -21,6 +22,7 @@ public:
   explicit MainWindow(QWidget *parent = nullptr);
 
   QSqlDatabase m_db;
+  GraphicsPane *m_pane;
 
 signals:
   void geoWKT(GeoNative);
